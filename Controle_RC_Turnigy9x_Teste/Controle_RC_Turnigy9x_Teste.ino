@@ -151,7 +151,7 @@ void pwmMotor(){
   if(dir==1&&(thetaD!=0&&thetaD!=90&&thetaD!=180&&thetaD!=270)){//frente esquerda
    digitalWrite(DirA,HIGH); //Motor A para FRENTE
    digitalWrite(DirB,HIGH); //Motor B para FRENTE
-   velA = 0.8*rAdj*sin(theta);
+   velA = 0.7*rAdj*sin(theta);
    analogWrite(MotorA,velA); //Velocidade Motor A = 0 a 255
    analogWrite(MotorB,rAdj); //Velocidade Motor B = 0 a 255  
   }
@@ -159,13 +159,13 @@ void pwmMotor(){
    digitalWrite(DirA,HIGH); //Motor A para FRENTE
    digitalWrite(DirB,HIGH); //Motor B para FRENTE
    analogWrite(MotorA,rAdj); //Velocidade Motor A = 0 a 255
-   velB = 0.8*rAdj*sin(theta);
+   velB = 0.7*rAdj*sin(theta);
    analogWrite(MotorB,velB); //Velocidade Motor B = 0 a 255  
   }
   if(dir==3&&(thetaD!=0&&thetaD!=90&&thetaD!=180&&thetaD!=270)){//ré esquerda
    digitalWrite(DirA,LOW); //Motor A para TRÁS
    digitalWrite(DirB,LOW); //Motor B para TRÁS
-   velA = 0.8*(-rAdj)*sin(theta);
+   velA = 0.7*(-rAdj)*sin(theta);
    analogWrite(MotorA,velA); //Velocidade Motor A = 0 a 255
    analogWrite(MotorB,rAdj); //Velocidade Motor B = 0 a 255  
   }
@@ -173,7 +173,7 @@ void pwmMotor(){
    digitalWrite(DirA,LOW); //Motor A para TRÁS
    digitalWrite(DirB,LOW); //Motor B para TRÁS
    analogWrite(MotorA,rAdj); //Velocidade Motor A = 0 a 255
-   velB = 0.8*(-rAdj)*sin(theta);
+   velB = 0.7*(-rAdj)*sin(theta);
    analogWrite(MotorB,velB); //Velocidade Motor B = 0 a 255  
   }  
   if(dir==5&&thetaD==90){//frente
