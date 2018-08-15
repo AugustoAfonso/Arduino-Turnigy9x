@@ -86,17 +86,17 @@ void printCh(){
 void printAdjCh(){
   Serial.print("ch1Adj = ");
   Serial.print(ch1Adj);
-  Serial.print(" -  ");     //Imprime os valores já remapeados (somente DEBUG)
+  Serial.print(" -  ");     //Imprime os valores já remapeados (somente DEBUG).
   Serial.print("ch2Adj = ");
   Serial.print(ch2Adj);
   Serial.println(" -  ");
   delay(500);
 }
 void recToPolar(){
-  r=sqrt(pow(ch1Adj,2)+pow(ch2Adj,2));
-  theta=atan2(ch2Adj,ch1Adj);
-  if(ch1Adj<-5&&ch2Adj>5){
-    thetaD=theta*(180/PI);
+  r=sqrt(pow(ch1Adj,2)+pow(ch2Adj,2));//Executa a conversão das coordenadas retangulares(ch1Adj e ch2Adj)
+  theta=atan2(ch2Adj,ch1Adj);         //em coordenada polares( raio e ângulo), de forma trigonométrica.
+  if(ch1Adj<-5&&ch2Adj>5){ //Realiza as conversões necessárias entre o resultado em radianos gerado pelas funções 
+    thetaD=theta*(180/PI);//trigonométricas da Linguagem C, para Graus, e define os quadrantes do movimento segundo a tabela acima (dir)
     dir=1;
   }
   if(ch1Adj>5&&ch2Adj>5){
@@ -136,10 +136,17 @@ void recToPolar(){
     thetaD=0;
     dir=0;
   }
-  
+ //---------------------------------------------------------------------------------------------------------- 
 }
-void pwmMotor(){
-  
+void pwmMotor(){ 
+  /*Realiza o controle dos motores de forma diferencial, de acordo  
+  com a direção e o quadrante que a alavanca do joystick se encontra.
+  Utiliza-se da entidade trigonométrica do seno, pois a velocidade de 
+  um dos motores deve ser menor para que o robô consiga realizar curvas, logo
+  um dos motores recebe o valor total do raio como PWM, e o seu par recebe a 
+  variável velA ou velB que é constituída pela multiplicação entre o raio,o  seno 
+  do ângulo naquele momento e um fator de correção (possibilita curvas mais fechadas ou mais abertas)
+  */
   rAdj=map(r,0,361,0,255);
  
   if(dir==0&&thetaD==0){//parada
