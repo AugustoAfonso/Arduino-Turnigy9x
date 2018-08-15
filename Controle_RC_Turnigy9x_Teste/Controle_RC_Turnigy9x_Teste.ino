@@ -58,17 +58,17 @@ void loop() {
   
   
 }
-void readCh(){
-  ch1Raw = pulseIn(ch1,HIGH);
-  ch2Raw = pulseIn(ch2,HIGH); 
+void readCh(){ 
+  ch1Raw = pulseIn(ch1,HIGH);//Lê  o tempo que os pinos conectados aos canais do receptor 
+  ch2Raw = pulseIn(ch2,HIGH);//Turnigy 9X permaneceram ativos durante o pulso recebido
 }
 
 void adjCh(){
-  ch1Adj=map(ch1Raw,1030,1860,-255,255);
-  ch2Adj=map(ch2Raw,1030,1860,-255,255);
+  ch1Adj=map(ch1Raw,1030,1860,-255,255);//Remapeia os valores recebidos dos canais, ajustando-os 
+  ch2Adj=map(ch2Raw,1030,1860,-255,255);//ajustando-os para valores entre -255 e +255
   if(ch1Adj>-10 && ch1Adj<10){
-    ch1Adj=0;
-  }
+    ch1Adj=0;                  //Cria deadzones, ou zonas mortas p/ compensar variações 
+  }                            //naturais na centralização do joystick
   if(ch2Adj>-20 && ch2Adj<20){
    ch2Adj=0;
   }
@@ -77,7 +77,7 @@ void adjCh(){
 void printCh(){
   Serial.print("Ch1 = ");
   Serial.print(ch1Raw);
-  Serial.print(" -  ");
+  Serial.print(" -  ");  //Imprime os Valores lidos pelos canais (somente DEBUG)
   Serial.print("Ch2 = ");
   Serial.print(ch2Raw);
   Serial.println(" -  ");
@@ -86,7 +86,7 @@ void printCh(){
 void printAdjCh(){
   Serial.print("ch1Adj = ");
   Serial.print(ch1Adj);
-  Serial.print(" -  ");
+  Serial.print(" -  ");     //Imprime os valores já remapeados (somente DEBUG)
   Serial.print("ch2Adj = ");
   Serial.print(ch2Adj);
   Serial.println(" -  ");
